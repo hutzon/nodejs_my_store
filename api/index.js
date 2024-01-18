@@ -8,18 +8,14 @@ const {
 } = require('./middlewares/error.handler');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-const whitelist = [
-  'http://localhost:8080',
-  'http://localhost:3000',
-  'http://mytest.com',
-];
+const whitelist = ['http://localhost:8080'];
 const options = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin)) {
+    if (whitelist.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('no permitido'));
