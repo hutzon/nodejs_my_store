@@ -23,7 +23,6 @@ const options = {
   },
 };
 app.use(cors(options));
-
 routerApi(app);
 
 app.use(logErrors);
